@@ -15,6 +15,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 app.use(express.json());
 app.use(rateLimiter);
+connectDb();
 // simple custon middleware
 // app.use((req,res,next)=>{
 //     console.log(`request method is ${req.method} and the uri is ${req.url}`);
@@ -28,8 +29,4 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../FRONTEND", "dist", "index.html"));
   });
 }
-connectDb().then(() => {
-  app.listen(PORT, () => {
-    console.log("Server run at PORT:", PORT);
-  });
-});
+export default  app;

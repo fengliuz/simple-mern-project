@@ -2,7 +2,7 @@
   "name": "project-mern",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "npm install --prefix BACKEND && npm install --prefix FRONTEND && npm run build --prefix FRONTEND",
     "start": "npm run start --prefix BACKEND"
