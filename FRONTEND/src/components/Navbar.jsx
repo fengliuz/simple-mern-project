@@ -24,11 +24,11 @@ function Navbar({ onThemeChange, currentTheme }) {
             className="size-auto lg:size-auto btn btn-primary btn-soft text-sm lg:text-xl"
           >
             <PlusIcon className="size-10 lg:size-5" />
-            <span className="hidden lg:inline">New note</span>
+            <span className="hidden md:inline md:text-xl lg:inline">New note</span>
           </Link>
           <div className="dropdown dropdown-end lg:size-auto ">
             <div tabIndex={0} role="button" className="btn m-1">
-              <span className=" hidden lg:inline">Themes: {currentTheme}</span>
+              <span className=" hidden md:inline md:text-xl lg:inline">Themes: {currentTheme}</span>
               <PaletteIcon />
             </div>
             <ul
