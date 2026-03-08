@@ -1,8 +1,9 @@
-import axios from "axios";
 import { ArrowLeftIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
+import RateLimited from "../components/RateLimited";
+import api from "../lib/axios";
 
 const CreatePage = () => {
   const [title, setTitle] = useState("");
@@ -14,7 +15,7 @@ const CreatePage = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await axios.post("http://localhost:5001/api/notes", {
+      await api.post("/notes", {
         title,
         description,
       });
@@ -24,6 +25,9 @@ const CreatePage = () => {
       if (error.response.status === 400) {
         const errors = error.response.data.errors;
         toast.error("Error input data\n" + errors.map((e) => e.message));
+      } 
+      else if (error.response.status === 429) {
+        toast.error("Too many actions please slow down ")
       } else {
         toast.error("ERROR");
       }
@@ -31,6 +35,7 @@ const CreatePage = () => {
       setIsLoading(false);
     }
   };
+  
   return (
     <div className=" min-h-screen bg-base-200">
       <div className="container mx-auto px-4 py-7">
