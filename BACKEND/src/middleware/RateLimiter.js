@@ -2,6 +2,7 @@ import rateLimit from "../config/upstash.js"
 
  const rateLimiter = async(req,res,next)=>{
     try{
+        console.log(`request is ${req.method} with url ${req.url}`)
         const {success} = await rateLimit.limit("my-key-rate-limit")
         if(!success){
             return res.status(429).json({

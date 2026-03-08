@@ -15,7 +15,7 @@ export const getDetailNote = async(req,res)=>{
     try {
         const note = await Note.findById(req.params.id)
         if(!note){
-            res.status(404).json({
+            return res.status(404).json({
                 message:"Data Not Found"
             })
         }
@@ -36,7 +36,7 @@ export const createNote = async(req,res)=>{
     } catch (error) {
         if(error.name === "ValidationError"){
             const message = Object.values(error.errors).map(val=>val.properties)
-            res.status(400).json({
+                return res.status(400).json({
                 message:"Data validation error in requests",
                 errors:message
             })
@@ -52,7 +52,7 @@ export const updateNote = async(req,res)=>{
         const {title,description} = req.body;
         const note = await Note.findByIdAndUpdate(req.params.id,{title,description},{new:true})
         if(!note){
-            res.status(404).json({
+            return res.status(404).json({
                 message:"Data Not Found"
             })
         }
@@ -69,7 +69,7 @@ export const deleteNote = async(req,res)=>{
         const {title,description} = req.body;
         const note = await Note.findByIdAndDelete(req.params.id,{title,description},{new:true})
         if(!note){
-            res.status(404).json({
+            return res.status(404).json({
                 message:"Data Not Found"
             })
         }
